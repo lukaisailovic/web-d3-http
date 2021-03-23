@@ -11,6 +11,7 @@ public class QuotesController {
         String htmlBody = "" +
                 "<form method=\"POST\">" +
                 "<label>Email: </label><input name=\"email\" type=\"email\"><br><br>" +
+                "<input name=\"test\" value=\"some value\" type=\"hidden\"><br><br>" +
                 "<button>Submit</button>" +
                 "</form>";
 
