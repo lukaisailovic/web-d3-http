@@ -1,11 +1,8 @@
 package http;
 
-import app.NewsletterController;
-import app.QuotesController;
-import app.RequestHandler;
+
 import http.response.NotFoundResponse;
 import http.response.Response;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,7 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.List;
+
 import java.util.StringTokenizer;
 import java.util.function.Function;
 
