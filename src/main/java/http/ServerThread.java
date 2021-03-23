@@ -1,6 +1,9 @@
 package http;
 
+import app.NewsletterController;
+import app.QuotesController;
 import app.RequestHandler;
+import http.response.NotFoundResponse;
 import http.response.Response;
 
 import java.io.BufferedReader;
@@ -10,17 +13,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
 import java.util.StringTokenizer;
+import java.util.function.Function;
 
 public class ServerThread implements Runnable {
 
     private final Socket client;
     private BufferedReader in;
     private PrintWriter out;
+    private final Router router;
 
-    public ServerThread(Socket sock) {
+    public ServerThread(Socket sock,Router router) {
         this.client = sock;
         this.initializeIO();
+        this.router = router;
 
     }
 
@@ -43,12 +50,16 @@ public class ServerThread implements Runnable {
             if (method.equals(HttpMethod.POST.toString())) {
                 // TODO: Ako je request method POST, procitaj telo zahteva (parametre)
             }
-
             Request request = new Request(HttpMethod.valueOf(method), path);
 
-            RequestHandler requestHandler = new RequestHandler();
-            Response response = requestHandler.handle(request);
-
+            // try to get handler;
+            Function<Request,Response> handler = this.router.getHandler(request);
+            Response response;
+            if (handler == null){
+                response = new NotFoundResponse();
+            } else {
+                response = handler.apply(request);
+            }
             System.out.println("\nHTTP odgovor:\n");
             System.out.println(response.getResponseString());
 

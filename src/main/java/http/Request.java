@@ -20,4 +20,17 @@ public class Request {
     public String getPath() {
         return path;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "httpMethod=" + httpMethod +
+                ", path='" + path + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return (this.path + this.getHttpMethod().toString()).hashCode();
+    }
 }
