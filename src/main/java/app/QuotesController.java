@@ -1,6 +1,6 @@
 package app;
 
-import http.Request;
+import http.request.Request;
 import http.StaticFiles;
 import http.response.HtmlResponse;
 import http.response.NotFoundResponse;

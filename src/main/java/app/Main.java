@@ -1,7 +1,7 @@
 package app;
 
 import http.HttpMethod;
-import http.Request;
+import http.request.Request;
 import http.Server;
 
 public class Main {

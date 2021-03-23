@@ -1,6 +1,8 @@
 package http;
 
 
+import http.request.Parser;
+import http.request.Request;
 import http.response.NotFoundResponse;
 import http.response.Response;
 import java.io.BufferedReader;
@@ -51,19 +53,7 @@ public class ServerThread implements Runnable {
             } while (!requestLine.trim().equals(""));
 
             if (method.equals(HttpMethod.POST.toString())) {
-                System.out.println("\nBODY:\n");
-                StringBuilder body = new StringBuilder();
-                int count = 0;
-                int c = in.read();
-                while ((c  != -1) && count < contentLength){
-                    body.append((char)c);
-                    count++;
-                    if (contentLength == count){
-                        break;
-                    }
-                    c = in.read();
-                }
-                String parsedBody = body.toString();
+                String parsedBody = Parser.bodyParser(in,contentLength);
                 request.addRequestBody(parsedBody);
                 System.out.println(parsedBody);
                 System.out.println(request.getBody());
