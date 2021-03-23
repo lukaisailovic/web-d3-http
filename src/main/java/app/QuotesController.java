@@ -3,22 +3,27 @@ package app;
 import http.Request;
 import http.response.HtmlResponse;
 import http.response.Response;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class QuotesController {
 
-
     public static Response getQuotes(Request request){
-        String htmlBody = "" +
-                "<form method=\"POST\">" +
-                "<label>Email: </label><input name=\"email\" type=\"email\"><br><br>" +
-                "<input name=\"test\" value=\"some value\" type=\"hidden\"><br><br>" +
-                "<button>Submit</button>" +
-                "</form>";
 
-        String content = "<html><head><title>Odgovor servera</title></head>\n";
-        content += "<body>" + htmlBody + "</body></html>";
-
-        return new HtmlResponse(content);
+        StringBuilder contentBuilder = new StringBuilder();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("./static/index.html"));
+            String str;
+            while ((str = in.readLine()) != null) {
+                contentBuilder.append(str);
+            }
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new HtmlResponse(contentBuilder.toString());
     }
 
 
