@@ -1,29 +1,25 @@
 package app;
 
 import http.Request;
+import http.StaticFiles;
 import http.response.HtmlResponse;
+import http.response.NotFoundResponse;
 import http.response.Response;
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.io.IOException;
 
 
 public class QuotesController {
 
     public static Response getQuotes(Request request){
-
-        StringBuilder contentBuilder = new StringBuilder();
+        String content ="";
         try {
-            BufferedReader in = new BufferedReader(new FileReader("./static/index.html"));
-            String str;
-            while ((str = in.readLine()) != null) {
-                contentBuilder.append(str);
-            }
-            in.close();
+            content = StaticFiles.load("index.html");
         } catch (IOException e) {
             e.printStackTrace();
+            return new NotFoundResponse();
         }
-        return new HtmlResponse(contentBuilder.toString());
+        return new HtmlResponse(content);
     }
 
 
