@@ -1,5 +1,7 @@
 package app;
 
+import shared.Quote;
+
 import java.util.ArrayList;
 import java.util.List;
 

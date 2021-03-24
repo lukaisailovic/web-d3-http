@@ -5,6 +5,7 @@ import http.client.Client;
 import http.request.Request;
 import http.StaticFiles;
 import http.response.*;
+import shared.Quote;
 
 import java.io.IOException;
 
