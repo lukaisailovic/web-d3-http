@@ -3,6 +3,7 @@ package app;
 import http.request.Request;
 import http.StaticFiles;
 import http.response.HtmlResponse;
+import http.response.TextResponse;
 import http.response.NotFoundResponse;
 import http.response.Response;
 
@@ -20,6 +21,10 @@ public class QuotesController {
             return new NotFoundResponse();
         }
         return new HtmlResponse(content);
+    }
+
+    public static Response test(Request request){
+        return new TextResponse("This is some quote lololo");
     }
 
 
