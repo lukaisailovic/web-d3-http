@@ -10,7 +10,8 @@ import java.util.function.Function;
 public class Router {
     private final Map<Request,Function<Request, Response>> routes = new HashMap<>();
 
-    public void registerRoute(Request request,Function<Request,Response> handler){
+    public void registerRoute(HttpMethod httpMethod, String path,Function<Request,Response> handler){
+        Request request = new Request(httpMethod,path);
         this.routes.put(request,handler);
     }
     public Function<Request,Response> getHandler(Request request){
