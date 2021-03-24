@@ -23,9 +23,7 @@ public class QuotesController {
         return new HtmlResponse(content);
     }
 
-    public static Response test(Request request){
-        return new TextResponse("This is some quote lololo");
-    }
+
 
 
 }
