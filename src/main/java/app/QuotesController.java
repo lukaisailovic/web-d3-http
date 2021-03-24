@@ -16,6 +16,7 @@ public class QuotesController {
             HtmlResponse response = new HtmlResponse(content);
             response.addParameter("qotd_author","Neki lik");
             response.addParameter("qotd_content","Neki quote");
+            response.addParameter("quotes",QuotesDatabase.getInstance().getAllQuotesAsHTMLListItems());
             return response;
         } catch (IOException e) {
             e.printStackTrace();

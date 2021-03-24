@@ -25,4 +25,12 @@ public class Quote {
     public void setQuote(String quote) {
         this.quote = quote;
     }
+
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "author='" + author + '\'' +
+                ", quote='" + quote + '\'' +
+                '}';
+    }
 }
