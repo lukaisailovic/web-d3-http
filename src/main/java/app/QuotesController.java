@@ -1,5 +1,7 @@
 package app;
 
+import http.HttpMethod;
+import http.client.Client;
 import http.request.Request;
 import http.StaticFiles;
 import http.response.*;
@@ -12,10 +14,15 @@ public class QuotesController {
     public static Response getQuotes(Request request){
         String content ="";
         try {
+            Client client = new Client("localhost",8081);
+            Request qotdRequest = new Request(HttpMethod.GET,"/get-qotd");
+            http.client.Response qotdResponse = client.sendRequest(qotdRequest);
+            String[] qotdParts = qotdResponse.getBody().split(":");
+
             content = StaticFiles.load("index.html");
             HtmlResponse response = new HtmlResponse(content);
-            response.addParameter("qotd_author","Neki lik");
-            response.addParameter("qotd_content","Neki quote");
+            response.addParameter("qotd_author",qotdParts[0]);
+            response.addParameter("qotd_content",qotdParts[1]);
             response.addParameter("quotes",QuotesDatabase.getInstance().getAllQuotesAsHTMLListItems());
             return response;
         } catch (IOException e) {
