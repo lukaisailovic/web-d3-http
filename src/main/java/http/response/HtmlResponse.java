@@ -20,7 +20,6 @@ public class HtmlResponse extends Response {
 
     private void replaceParameters(){
         String regexString = Pattern.quote(START_PATTERN) + "(.*?)" + Pattern.quote(END_PATTERN);
-        System.out.println(regexString);
         Pattern pattern = Pattern.compile(regexString);
         Matcher matcher = pattern.matcher(html);
         while (matcher.find()) {
