@@ -55,7 +55,6 @@ public class ServerThread implements Runnable {
             if (method.equals(HttpMethod.POST.toString())) {
                 String parsedBody = Parser.bodyParser(in,contentLength);
                 request.addRequestBody(parsedBody);
-                System.out.println(parsedBody);
                 System.out.println(request.getBody());
             }
 

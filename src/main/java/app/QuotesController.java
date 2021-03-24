@@ -2,10 +2,7 @@ package app;
 
 import http.request.Request;
 import http.StaticFiles;
-import http.response.HtmlResponse;
-import http.response.TextResponse;
-import http.response.NotFoundResponse;
-import http.response.Response;
+import http.response.*;
 
 import java.io.IOException;
 
@@ -21,6 +18,10 @@ public class QuotesController {
             return new NotFoundResponse();
         }
         return new HtmlResponse(content);
+    }
+
+    public static Response saveQuote(Request request){
+        return new RedirectResponse("/newsletter");
     }
 
 

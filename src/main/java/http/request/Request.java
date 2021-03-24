@@ -40,7 +40,14 @@ public class Request {
         String[] data = body.split("&");
         for (String param : data) {
             String[] parts = param.split("=");
-            this.body.put(URLDecoder.decode(parts[0], StandardCharsets.UTF_8),URLDecoder.decode(parts[1], StandardCharsets.UTF_8));
+           if (parts.length > 0){
+               if (parts.length > 2){
+                   this.body.put(URLDecoder.decode(parts[0], StandardCharsets.UTF_8),URLDecoder.decode(parts[1], StandardCharsets.UTF_8));
+               } else {
+                   this.body.put(URLDecoder.decode(parts[0], StandardCharsets.UTF_8),"");
+               }
+           }
+
         }
     }
 
