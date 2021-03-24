@@ -18,12 +18,12 @@ public class QuotesController {
             Client client = new Client("localhost",8081);
             Request qotdRequest = new Request(HttpMethod.GET,"/get-qotd");
             http.client.Response qotdResponse = client.sendRequest(qotdRequest);
-            String[] qotdParts = qotdResponse.getBody().split(":");
+            Quote randomQuote = Quote.deserialie(qotdResponse.getBody());
 
             content = StaticFiles.load("index.html");
             HtmlResponse response = new HtmlResponse(content);
-            response.addParameter("qotd_author",qotdParts[0]);
-            response.addParameter("qotd_content",qotdParts[1]);
+            response.addParameter("qotd_author",randomQuote.getAuthor());
+            response.addParameter("qotd_content",randomQuote.getQuote());
             response.addParameter("quotes",QuotesDatabase.getInstance().getAllQuotesAsHTMLListItems());
             return response;
         } catch (IOException e) {

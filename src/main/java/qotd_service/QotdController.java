@@ -2,12 +2,11 @@ package qotd_service;
 
 
 import http.request.Request;
+import http.response.JsonResponse;
 import http.response.Response;
-import http.response.TextResponse;
 import shared.Quote;
-
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +27,6 @@ public class QotdController {
         Random random = new Random();
         int r = random.nextInt(quotes.size());
         Quote randomQuote = quotes.get(r);
-        String content = randomQuote.getAuthor()+": "+randomQuote.getQuote();
-        return new TextResponse(content);
+        return new JsonResponse(randomQuote.serialize());
     }
 }

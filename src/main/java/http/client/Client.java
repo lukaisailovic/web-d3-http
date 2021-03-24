@@ -63,7 +63,7 @@ public class Client {
 
         if (contentLength > 0) {
             String parsedBody = Parser.bodyParser(in,contentLength);
-            response.setBody(URLDecoder.decode(parsedBody, StandardCharsets.UTF_8));
+            response.setBody(parsedBody);
             System.out.println(parsedBody);
         }
         return response;

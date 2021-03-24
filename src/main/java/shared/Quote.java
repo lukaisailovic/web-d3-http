@@ -1,5 +1,7 @@
 package shared;
 
+import com.google.gson.Gson;
+
 public class Quote {
 
     private String author;
@@ -32,5 +34,15 @@ public class Quote {
                 "author='" + author + '\'' +
                 ", quote='" + quote + '\'' +
                 '}';
+    }
+
+    public String serialize(){
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static Quote deserialie(String json){
+        Gson gson = new Gson();
+        return gson.fromJson(json,Quote.class);
     }
 }
